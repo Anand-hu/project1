@@ -1,31 +1,38 @@
 import React, { useState } from 'react'
+import MatchList from './components/MatchList'
 
 const App = () => {
-  const [books, setBooks] = useState([])
-  const [title, setTitle] = useState('')
+  const [matches, setMatches] = useState([])
+  const [teamA, setTeamA] = useState('')
+  const [teamB, setTeamB] = useState('')
 
-  const addBook = () => {
-    if (title.trim()) {
-      setBooks([...books, title])
-      setTitle('')
+  const addMatch = () => {
+    if (teamA.trim() && teamB.trim()) {
+      setMatches([...matches, { teamA, teamB }])
+      setTeamA('')
+      setTeamB('')
     }
   }
 
   return (
     <div className="app">
-      <h1>📚 Book Library</h1>
-      <input
-        type="text"
-        placeholder="Enter book title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <button onClick={addBook}>Add Book</button>
-      <ul>
-        {books.map((book, idx) => (
-          <li key={idx}>{book}</li>
-        ))}
-      </ul>
+      <h1>🏆 Sports Match Tracker</h1>
+      <div className="input-group">
+        <input
+          type="text"
+          placeholder="Team A"
+          value={teamA}
+          onChange={(e) => setTeamA(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Team B"
+          value={teamB}
+          onChange={(e) => setTeamB(e.target.value)}
+        />
+        <button onClick={addMatch}>Add Match</button>
+      </div>
+      <MatchList matches={matches} />
     </div>
   )
 }

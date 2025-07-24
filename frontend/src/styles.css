@@ -1,46 +1,126 @@
+/* ========== BASE LIGHT STYLES ========== */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: #f1f5f9;
+  background: #f4f7fa;
+  transition: background 0.3s, color 0.3s;
 }
 
 .app {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   padding: 2rem;
+  transition: background 0.3s, color 0.3s;
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
+.header-content {
+  text-align: left;
+}
+
 .header h1 {
-  color: #2563eb;
+  color: #1d4ed8;
   margin: 0;
+  font-size: 2.4rem;
 }
 
 .header p {
+  color: #444;
   font-size: 1rem;
-  color: #555;
 }
 
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Switch Toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #2563eb;
+}
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Form */
 .form-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
   justify-content: center;
   align-items: center;
 }
 
 input {
-  padding: 0.7rem;
+  padding: 0.8rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  flex: 1 1 150px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  flex: 1 1 180px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 5px #2563eb33;
+}
+
+button {
+  padding: 0.8rem 1.2rem;
+  background-color: #2563eb;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #1e3a8a;
+  transform: scale(1.05);
 }
 
 .vs {
@@ -49,26 +129,13 @@ input {
   color: #333;
 }
 
-button {
-  padding: 0.7rem 1.2rem;
-  background-color: #2563eb;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease-in-out;
-}
-
-button:hover {
-  background-color: #1d4ed8;
-}
-
+/* Match List */
 .match-list {
   background: white;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
 }
 
 .match-list h2 {
@@ -82,19 +149,23 @@ ul {
 }
 
 .match-card {
-  padding: 0.8rem;
-  border-bottom: 1px solid #e2e8f0;
+  background: #f0f4f8;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: 0.3s;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.match-card:last-child {
-  border-bottom: none;
+.match-card:hover {
+  background-color: #e0f2fe;
+  transform: translateY(-2px);
 }
 
 .teams {
-  font-weight: 500;
+  font-weight: 600;
   color: #1f2937;
 }
 
@@ -107,4 +178,82 @@ ul {
   text-align: center;
   color: #888;
   font-style: italic;
+  margin-top: 2rem;
+}
+
+/* ========== DARK MODE ========== */
+body.dark {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark .app {
+  background: #1e293b;
+}
+
+body.dark .header h1 {
+  color: #93c5fd;
+}
+body.dark .header p {
+  color: #a1a1aa;
+}
+body.dark input {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+body.dark button {
+  background-color: #3b82f6;
+}
+body.dark .match-list {
+  background: #1e293b;
+}
+body.dark .match-card {
+  background: #334155;
+}
+body.dark .match-card:hover {
+  background: #475569;
+}
+
+/* ========== ANIMATIONS ========== */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-in-out;
+}
+
+.bounce-in {
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .form-section {
+    flex-direction: column;
+  }
+  input, button {
+    width: 100%;
+  }
+  .match-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

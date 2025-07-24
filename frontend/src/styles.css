@@ -1,19 +1,31 @@
-/* ========== BASE LIGHT STYLES ========== */
+/* ========== BACKGROUND + BASE ========== */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f7fa;
+  background: url('https://images.unsplash.com/photo-1606813909227-2f4c7ddf1e5c?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
   transition: background 0.3s, color 0.3s;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: -1;
 }
 
 .app {
   max-width: 900px;
   margin: auto;
   padding: 2rem;
-  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+  backdrop-filter: blur(6px);
 }
 
+/* ========== HEADER ========== */
 .header {
   display: flex;
   justify-content: space-between;
@@ -21,23 +33,21 @@ body {
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
-}
-
-.header-content {
-  text-align: left;
+  color: #fff;
 }
 
 .header h1 {
-  color: #1d4ed8;
   margin: 0;
   font-size: 2.4rem;
+  color: #facc15;
 }
 
 .header p {
-  color: #444;
+  color: #e5e7eb;
   font-size: 1rem;
 }
 
+/* ========== TOGGLE SWITCH ========== */
 .toggle-container {
   display: flex;
   align-items: center;
@@ -45,7 +55,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* Switch Toggle */
 .switch {
   position: relative;
   display: inline-block;
@@ -61,7 +70,7 @@ body {
   position: absolute;
   cursor: pointer;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #ccc;
+  background-color: #bbb;
   transition: 0.4s;
   border-radius: 24px;
 }
@@ -82,7 +91,7 @@ input:checked + .slider:before {
   transform: translateX(22px);
 }
 
-/* Form */
+/* ========== FORM SECTION ========== */
 .form-section {
   display: flex;
   flex-wrap: wrap;
@@ -92,55 +101,58 @@ input:checked + .slider:before {
   align-items: center;
 }
 
-input {
+input,
+select {
   padding: 0.8rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 8px;
   flex: 1 1 180px;
   transition: 0.3s;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #111;
 }
 
-input:focus {
-  border-color: #2563eb;
+input:focus,
+select:focus {
   outline: none;
-  box-shadow: 0 0 5px #2563eb33;
+  box-shadow: 0 0 5px #facc15;
 }
 
 button {
   padding: 0.8rem 1.2rem;
-  background-color: #2563eb;
-  color: white;
+  background-color: #facc15;
+  color: #111827;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: 0.3s;
 }
 
 button:hover {
-  background-color: #1e3a8a;
+  background-color: #eab308;
   transform: scale(1.05);
 }
 
 .vs {
   font-weight: bold;
   font-size: 1.1rem;
-  color: #333;
+  color: #fff;
 }
 
-/* Match List */
+/* ========== MATCH LIST ========== */
 .match-list {
-  background: white;
+  background: rgba(255, 255, 255, 0.08);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .match-list h2 {
-  margin-top: 0;
-  color: #111827;
+  color: #fbbf24;
+  margin-bottom: 1rem;
 }
 
 ul {
@@ -149,34 +161,40 @@ ul {
 }
 
 .match-card {
-  background: #f0f4f8;
+  background: rgba(255, 255, 255, 0.12);
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
-  transition: 0.3s;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: transform 0.2s ease;
+  color: #f9fafb;
 }
 
 .match-card:hover {
-  background-color: #e0f2fe;
+  background-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
 
 .teams {
   font-weight: 600;
-  color: #1f2937;
 }
 
 .date {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: #d1d5db;
+}
+
+.type {
+  font-size: 0.9rem;
+  color: #fbbf24;
+  margin-top: 0.4rem;
 }
 
 .empty {
   text-align: center;
-  color: #888;
+  color: #f1f5f9;
   font-style: italic;
   margin-top: 2rem;
 }
@@ -197,13 +215,15 @@ body.dark .header h1 {
 body.dark .header p {
   color: #a1a1aa;
 }
-body.dark input {
-  background: #1e293b;
-  border-color: #334155;
+body.dark input,
+body.dark select {
+  background-color: #1e293b;
   color: #e2e8f0;
+  border: 1px solid #334155;
 }
 body.dark button {
   background-color: #3b82f6;
+  color: white;
 }
 body.dark .match-list {
   background: #1e293b;
@@ -213,6 +233,12 @@ body.dark .match-card {
 }
 body.dark .match-card:hover {
   background: #475569;
+}
+body.dark .date {
+  color: #cbd5e1;
+}
+body.dark .type {
+  color: #facc15;
 }
 
 /* ========== ANIMATIONS ========== */
@@ -244,14 +270,18 @@ body.dark .match-card:hover {
   100% { transform: scale(1); }
 }
 
-/* Responsive */
+/* ========== RESPONSIVE ========== */
 @media screen and (max-width: 768px) {
   .form-section {
     flex-direction: column;
   }
-  input, button {
+
+  input,
+  select,
+  button {
     width: 100%;
   }
+
   .match-card {
     flex-direction: column;
     align-items: flex-start;

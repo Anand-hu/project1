@@ -12,9 +12,12 @@ const MatchList = ({ matches }) => {
         {matches.map((match) => (
           <li key={match.id}>
             <div className="match-card slide-up">
-              <span className="teams">
-                {match.teamA} <span className="vs">vs</span> {match.teamB}
-              </span>
+              <div>
+                <span className="teams">
+                  {match.teamA} <span className="vs">vs</span> {match.teamB}
+                </span>
+                <div className="type">🏅 {match.type}</div>
+              </div>
               <span className="date">{match.date}</span>
             </div>
           </li>

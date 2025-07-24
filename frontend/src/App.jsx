@@ -6,16 +6,15 @@ const App = () => {
   const [matches, setMatches] = useState([])
   const [teamA, setTeamA] = useState('')
   const [teamB, setTeamB] = useState('')
+  const [matchType, setMatchType] = useState('Football')
   const [darkMode, setDarkMode] = useState(false)
 
-  // Load saved theme from localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('darkMode') === 'true'
     setDarkMode(savedTheme)
     document.body.classList.toggle('dark', savedTheme)
   }, [])
 
-  // Update theme toggle
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
     localStorage.setItem('darkMode', !darkMode)
@@ -32,12 +31,14 @@ const App = () => {
       id: Date.now(),
       teamA,
       teamB,
+      type: matchType,
       date: new Date().toLocaleString(),
     }
 
     setMatches([newMatch, ...matches])
     setTeamA('')
     setTeamB('')
+    setMatchType('Football')
   }
 
   return (
@@ -57,6 +58,13 @@ const App = () => {
           value={teamB}
           onChange={(e) => setTeamB(e.target.value)}
         />
+        <select value={matchType} onChange={(e) => setMatchType(e.target.value)}>
+          <option>Football</option>
+          <option>Cricket</option>
+          <option>Basketball</option>
+          <option>Tennis</option>
+          <option>Hockey</option>
+        </select>
         <button onClick={addMatch}>➕ Add Match</button>
       </div>
       <MatchList matches={matches} />
